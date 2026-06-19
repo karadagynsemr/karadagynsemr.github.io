@@ -1,1 +1,0 @@
-# karadagynsemr.github.io

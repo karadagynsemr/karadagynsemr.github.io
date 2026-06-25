@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Yunus Emre Karadağ - Bilgisayar Mühendisliği, veri bilimi, makine öğrenmesi ve açıklanabilir yapay zeka portfolyosu" />
+  <title>Yunus Emre Karadağ | Portfolyo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f8fb;
+      --surface: rgba(255,255,255,.88);
+      --surface-solid: #ffffff;
+      --text: #182430;
+      --muted: #607282;
+      --line: #d7e3ec;
+      --accent: #2f6f8f;
+      --accent-2: #62a7a4;
+      --accent-3: #8cc7d1;
+      --teal: #2d8d95;
+      --dark: #173042;
+      --white: #ffffff;
+      --shadow: 0 18px 46px rgba(23, 48, 66, .11);
+      --radius: 24px;
+      --transition: 280ms cubic-bezier(.2,.7,.2,1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(47,111,143,.16), transparent 24%),
+        radial-gradient(circle at 92% 8%, rgba(98,167,164,.17), transparent 22%),
+        radial-gradient(circle at 76% 80%, rgba(140,199,209,.20), transparent 24%),
+        linear-gradient(135deg, #f7fbff 0%, #eef7fb 54%, #f7fbff 100%);
+      font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(47,111,143,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(47,111,143,.045) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle at 85% 18%, black, transparent 50%);
+      opacity: .7;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(1120px, calc(100% - 36px)); margin-inline: auto; }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(255,247,251,.84);
+      border-bottom: 1px solid rgba(215,227,236,.9);
+    }
+
+    .nav-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      padding: 10px 0;
+    }
+
+    .brand { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .brand-name {
+      font: 800 20px/1.05 "Manrope", sans-serif;
+      letter-spacing: -.03em;
+      color: var(--dark);
+      white-space: nowrap;
+    }
+    .brand-name span { color: var(--accent); }
+    .brand-sub {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-left: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav-links a, .lang-btn {
+      position: relative;
+      transition: color var(--transition), background var(--transition), transform var(--transition);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .lang-switch {
+      display: inline-flex;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 10px 24px rgba(107,47,76,.07);
+    }
+
+    .lang-btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font: 800 12px/1 "DM Sans", sans-serif;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+    }
+    .lang-btn.active { color: white; background: linear-gradient(135deg, var(--dark), var(--accent)); }
+
+    .hero {
+      min-height: 82vh;
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      align-items: center;
+      gap: 72px;
+      padding: 76px 0 64px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.78);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 750;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 18px rgba(107,47,76,.05);
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: #63b98f;
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px rgba(99,185,143,.14);
+    }
+
+    h1, h2, h3 { font-family: "Manrope", sans-serif; margin: 0; letter-spacing: -.035em; }
+    h1 { font-size: clamp(46px, 7vw, 82px); line-height: 1.03; max-width: 760px; }
+    .hero h1 span { color: var(--accent); }
+    .hero-copy { max-width: 690px; margin: 25px 0 30px; color: var(--muted); font-size: clamp(17px, 2vw, 20px); }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 20px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      font-weight: 750;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+    .btn-primary { color: white; background: linear-gradient(135deg, var(--dark), var(--accent)); border-color: transparent; }
+    .btn-secondary { background: rgba(255,255,255,.82); color: var(--dark); }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(107,47,76,.13); }
+
+    .hero-visual { position: relative; max-width: 420px; justify-self: end; }
+    .portrait-wrap {
+      padding: 14px;
+      background: rgba(255,255,255,.80);
+      border: 1px solid rgba(255,255,255,.98);
+      border-radius: 36px;
+      box-shadow: var(--shadow);
+      transform: rotate(1.7deg);
+    }
+    .portrait { aspect-ratio: 4/5; object-fit: cover; object-position: center top; border-radius: 26px; filter: saturate(.98) contrast(1.02); }
+    .floating-card {
+      position: absolute;
+      left: -74px;
+      bottom: 34px;
+      width: 246px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.96);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      transform: rotate(-2deg);
+    }
+    .floating-card strong { display: block; font-size: 15px; color: var(--dark); }
+    .floating-card span { color: var(--muted); font-size: 13px; }
+
+    section { padding: 78px 0; }
+    .section-head { display: grid; grid-template-columns: .7fr 1.3fr; gap: 48px; align-items: end; margin-bottom: 38px; }
+    .section-kicker { color: var(--accent); font-size: 13px; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+    h2 { font-size: clamp(34px, 4.5vw, 54px); line-height: 1.12; }
+    .section-intro { color: var(--muted); font-size: 17px; max-width: 680px; margin: 0; }
+
+    .projects { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px; }
+    .project {
+      min-height: 370px;
+      padding: 28px;
+      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid rgba(215,227,236,.96);
+      box-shadow: 0 12px 34px rgba(107,47,76,.05);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .project::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(47,111,143,.08), transparent 45%);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .project:hover { transform: translateY(-8px); box-shadow: 0 22px 42px rgba(107,47,76,.13); border-color: rgba(47,111,143,.30); }
+    .project:hover::before { opacity: 1; }
+    .project.featured { grid-column: 1 / -1; min-height: 410px; color: white; background: linear-gradient(135deg, rgba(84,35,60,.98), rgba(47,111,143,.96)); }
+    .project-top { display: flex; justify-content: space-between; align-items: start; gap: 20px; margin-bottom: 26px; position: relative; z-index: 2; }
+    .project-number { color: var(--muted); font-size: 13px; font-weight: 850; }
+    .featured .project-number { color: rgba(255,255,255,.62); }
+    .arrow { width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid currentColor; border-radius: 50%; opacity: .85; }
+    .project h3 { font-size: 28px; line-height: 1.2; margin-bottom: 12px; position: relative; z-index: 2; }
+    .project p { color: var(--muted); margin: 0 0 22px; max-width: 800px; position: relative; z-index: 2; }
+    .featured p { color: rgba(255,255,255,.82); }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; position: relative; z-index: 2; }
+    .tag { border-radius: 999px; border: 1px solid var(--line); padding: 6px 10px; font-size: 12px; font-weight: 750; color: var(--muted); background: rgba(255,255,255,.62); }
+    .featured .tag { color: rgba(255,255,255,.90); border-color: rgba(255,255,255,.26); background: rgba(255,255,255,.08); }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+    .skill-card { border-top: 1px solid var(--line); padding: 22px 4px 6px; transition: transform var(--transition); }
+    .skill-card:hover { transform: translateY(-3px); }
+    .skill-card h3 { font-size: 18px; margin-bottom: 12px; }
+    .skill-card p { color: var(--muted); margin: 0; }
+
+    .timeline { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .timeline-card {
+      padding: 28px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .timeline-card:hover { transform: translateY(-6px); box-shadow: 0 18px 34px rgba(107,47,76,.09); }
+    .timeline-card small { color: var(--accent); font-weight: 850; }
+    .timeline-card h3 { font-size: 23px; margin: 7px 0; }
+    .timeline-card p { color: var(--muted); margin: 0; }
+
+    .cert-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+    .cert-card {
+      padding: 22px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.82);
+      box-shadow: 0 10px 26px rgba(107,47,76,.05);
+    }
+    .cert-card strong { display: block; color: var(--dark); margin-bottom: 5px; }
+    .cert-card span { color: var(--muted); font-size: 14px; }
+
+    .contact { padding-bottom: 100px; }
+    .contact-box {
+      border-radius: 32px;
+      color: white;
+      padding: clamp(34px, 6vw, 66px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      background:
+        radial-gradient(circle at 90% 10%, rgba(255,255,255,.18), transparent 24%),
+        linear-gradient(135deg, var(--dark), #8d3f62);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-box p { color: rgba(255,255,255,.77); max-width: 590px; margin: 17px 0 0; }
+    .contact-links { display: grid; gap: 10px; margin-top: 24px; }
+    .contact-links a { padding: 14px 16px; border: 1px solid rgba(255,255,255,.19); border-radius: 14px; color: rgba(255,255,255,.94); font-weight: 650; transition: background var(--transition), transform var(--transition); }
+    .contact-links a:hover { background: rgba(255,255,255,.09); transform: translateX(4px); }
+
+    .contact-form { display: grid; gap: 12px; position: relative; z-index: 2; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    input, textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 14px;
+      padding: 13px 14px;
+      background: rgba(255,255,255,.10);
+      color: white;
+      font: 500 14px/1.4 "DM Sans", sans-serif;
+      outline: none;
+    }
+    textarea { min-height: 126px; resize: vertical; }
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,.62); }
+    .form-button { cursor: pointer; width: max-content; min-width: 150px; background: white; color: var(--dark); border-color: transparent; }
+
+    footer { border-top: 1px solid var(--line); padding: 24px 0 34px; color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 56px; }
+      .hero-visual { justify-self: center; width: min(84vw, 390px); }
+      .floating-card { left: -16px; }
+      .section-head, .contact-box { grid-template-columns: 1fr; }
+      .projects, .timeline { grid-template-columns: 1fr; }
+      .project.featured { grid-column: auto; }
+      .skills-grid, .cert-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .container { width: min(100% - 24px, 1120px); }
+      .brand-name { white-space: normal; }
+      h1 { font-size: 43px; }
+      section { padding: 58px 0; }
+      .skills-grid, .cert-grid, .form-row { grid-template-columns: 1fr; }
+      .floating-card { position: static; width: 100%; margin-top: 12px; }
+      .portrait-wrap { transform: none; }
+      .project { min-height: auto; }
+      .project-top { margin-bottom: 22px; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Yunus Emre Karadağ portfolio home">
+        <span class="brand-name">Yunus Emre <span>Karadağ</span></span>
+        <span class="brand-sub" data-i18n="brandSub">Portfolyo</span>
+      </a>
+      <div class="nav-actions">
+        <div class="nav-links" aria-label="Main navigation">
+          <a href="#projects" data-i18n="navProjects">Projeler</a>
+          <a href="#skills" data-i18n="navSkills">Yetenekler</a>
+          <a href="#experience" data-i18n="navExperience">Deneyim</a>
+          <a href="#certificates" data-i18n="navCertificates">Sertifikalar</a>
+          <a href="#languages" data-i18n="navLanguage">Dil</a>
+          <a href="#contact" data-i18n="navContact">İletişim</a>
+        </div>
+        <div class="lang-switch" aria-label="Language selection">
+          <button class="lang-btn active" type="button" data-lang="tr">TR</button>
+          <button class="lang-btn" type="button" data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <div class="container hero">
+      <div class="reveal show">
+        <div class="eyebrow"><span class="dot"></span><span data-i18n="eyebrow">Yeni fırsatlara açık</span></div>
+        <h1 data-i18n-html="heroTitle">Veriyi, <span>anlaşılır</span> çözümlere dönüştürüyorum.</h1>
+        <p class="hero-copy" data-i18n="heroCopy">Ben Yunus Emre Karadağ. Bilgisayar mühendisiyim; veri bilimi, makine öğrenmesi, açıklanabilir yapay zeka ve veri görselleştirme alanlarında projeler geliştiriyorum.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#projects" data-i18n="heroProjectButton">Projelerimi incele</a>
+          <a class="btn btn-secondary" id="cvPdfLink" href="Yunus_Emre_Karadag_CV_TR.pdf" target="_blank" rel="noopener" data-i18n="cvPdfButton">Türkçe CV (PDF)</a>
+          <a class="btn btn-secondary" id="cvWordLink" href="Yunus_Emre_Karadag_CV_TR.docx" data-i18n="cvWordButton">Türkçe CV (Word)</a>
+        </div>
+      </div>
+      <div class="hero-visual reveal show">
+        <div class="portrait-wrap">
+          <img class="portrait" src="assets/yunus-profile.png" alt="Yunus Emre Karadağ professional portrait" />
+        </div>
+        <div class="floating-card">
+          <strong data-i18n="floatTitle">Data Science · ML · XAI</strong>
+          <span data-i18n="floatText">Veri odaklı, açıklanabilir ve kullanışlı çözümler.</span>
+        </div>
+      </div>
+    </div>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker" data-i18n="projectsKicker">Seçili işler</div>
+            <h2 data-i18n="projectsTitle">Projeler</h2>
+          </div>
+          <p class="section-intro" data-i18n="projectsIntro">Makine öğrenmesi, açıklanabilir yapay zeka, veritabanı modelleme, dashboard tasarımı ve web tabanlı sistem geliştirme üzerine yaptığım çalışmalardan bazıları.</p>
+        </div>
+        <div class="projects">
+          <a class="project featured reveal" href="https://github.com/karadagynsemr/explainova" target="_blank" rel="noopener">
+            <div class="project-top"><span class="project-number">01</span><span class="arrow">↗</span></div>
+            <h3 data-i18n="projectExplainovaTitle">Explainova - Kodlama Gerektirmeyen Makine Öğrenmesi Platformu</h3>
+            <p data-i18n="projectExplainovaText">Teknik bilgisi olmayan kullanıcıların tablo verilerini analiz edip makine öğrenmesi modellerini karşılaştırabildiği uçtan uca bir platform. Ön işleme, otomatik sınıflandırma/regresyon akışı, SHAP, PDP/ICE ve Word raporu oluşturma özellikleri içerir.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Streamlit</span><span class="tag">scikit-learn</span><span class="tag">SHAP</span></div>
+          </a>
+          <a class="project reveal" href="https://karadagynsemr.github.io/#projects" target="_blank" rel="noopener">
+            <div class="project-top"><span class="project-number">02</span><span class="arrow">↗</span></div>
+            <h3 data-i18n="projectMobileTitle">Mobil Uygulama Mağazası Veritabanı Tasarımı ve Görselleştirme</h3>
+            <p data-i18n="projectMobileText">Uygulama mağazası verisi için ER diyagramı, ilişkisel şema, normalizasyon yapısı, SQL sorguları ve Tableau dashboardları tasarladım.</p>
+            <div class="tags"><span class="tag">SQL</span><span class="tag">ER Model</span><span class="tag">Tableau</span></div>
+          </a>
+          <a class="project reveal" href="https://github.com/karadagynsemr/attendance_app_wZMQ" target="_blank" rel="noopener">
+            <div class="project-top"><span class="project-number">03</span><span class="arrow">↗</span></div>
+            <h3 data-i18n="projectAttendanceTitle">Öğrenci Yoklama Takip Sistemi</h3>
+            <p data-i18n="projectAttendanceText">Flask arayüzünü PostgreSQL veri katmanı ve ZeroMQ mesajlaşma yapısıyla bağlayan web tabanlı yoklama sistemi geliştirdim.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">PostgreSQL</span><span class="tag">ZeroMQ</span></div>
+          </a>
+          <a class="project reveal" href="https://github.com/karadagynsemr/Restaurant-Management-System-Database-" target="_blank" rel="noopener">
+            <div class="project-top"><span class="project-number">04</span><span class="arrow">↗</span></div>
+            <h3 data-i18n="projectRestaurantTitle">Restoran Yönetim Sistemi</h3>
+            <p data-i18n="projectRestaurantText">Rezervasyon, sipariş, menü ve restoran operasyonları için ilişkisel tablolar ve temel SQL sorguları tasarladım.</p>
+            <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Database Design</span><span class="tag">SQL</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker" data-i18n="skillsKicker">Teknik alanlar</div>
+            <h2 data-i18n="skillsTitle">Yetenekler</h2>
+          </div>
+          <p class="section-intro" data-i18n="skillsIntro">Veri bilimi ve yazılım geliştirme süreçlerinde kullandığım araçlar ve üzerine çalıştığım alanlar.</p>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-card reveal"><h3 data-i18n="skillProgrammingTitle">Programlama</h3><p>Python, SQL, C#, Java, C</p></div>
+          <div class="skill-card reveal"><h3 data-i18n="skillDataTitle">Veri Bilimi & ML</h3><p>Pandas, NumPy, scikit-learn, SHAP, Matplotlib, Seaborn</p></div>
+          <div class="skill-card reveal"><h3 data-i18n="skillVizTitle">Görselleştirme</h3><p>Tableau, Dashboard Design, Jupyter Notebook</p></div>
+          <div class="skill-card reveal"><h3 data-i18n="skillDatabaseTitle">Veritabanı</h3><p>PostgreSQL, Database Design, ER Modeling</p></div>
+          <div class="skill-card reveal"><h3 data-i18n="skillWebTitle">Web & Uygulama</h3><p>Flask, Streamlit, HTML/CSS, Git, GitHub</p></div>
+          <div class="skill-card reveal"><h3 data-i18n="skillPracticeTitle">Yazılım Pratikleri</h3><p>Data Preprocessing, Model Evaluation, Version Control</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker" data-i18n="experienceKicker">Deneyim & eğitim</div>
+            <h2 data-i18n="experienceTitle">Arka plan</h2>
+          </div>
+          <p class="section-intro" data-i18n="experienceIntro">Akademik çalışmalarımı uygulamalı projeler ve staj deneyimiyle destekledim.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-card reveal">
+            <small data-i18n="internDate">Ağustos 2025</small>
+            <h3 data-i18n="internTitle">Stajyer · Telcorex İletişim ve Dijital Dönüşüm Hizmetleri</h3>
+            <p data-i18n="internText">Python kullanarak veri hazırlama, keşifsel veri analizi ve makine öğrenmesi model eğitimi çalışmalarına destek verdim. Pandas, NumPy ve scikit-learn ile veri ön işleme ve model değerlendirme akışlarını uyguladım.</p>
+          </div>
+          <div class="timeline-card reveal">
+            <small>2022 - 2026</small>
+            <h3 data-i18n="educationTitle">Bilgisayar Mühendisliği · Alanya Alaaddin Keykubat Üniversitesi</h3>
+            <p data-i18n="educationText">Veri bilimi, makine öğrenmesi, veritabanı sistemleri, yazılım geliştirme ve veri görselleştirme odaklı çalışmalar yaptım.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="certificates">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker" data-i18n="certKicker">Sertifikalar</div>
+            <h2 data-i18n="certTitle">Programlar</h2>
+          </div>
+          <p class="section-intro" data-i18n="certIntro">Yapay zeka, veri bilimi, makine öğrenmesi, Git/GitHub ve UI/UX alanlarında tamamladığım eğitimler.</p>
+        </div>
+        <div class="cert-grid">
+          <div class="cert-card reveal"><strong data-i18n="certHuawei">Huawei AI Bootcamp</strong><span data-i18n="certHuaweiTag">Yapay zeka temelleri</span></div>
+          <div class="cert-card reveal"><strong data-i18n="certGit">Git & GitHub</strong><span>BTK Akademi</span></div>
+          <div class="cert-card reveal"><strong data-i18n="certDataViz">Data Science & Data Visualization</strong><span>Turkcell</span></div>
+          <div class="cert-card reveal"><strong data-i18n="certMl">Machine Learning</strong><span>Udemy</span></div>
+          <div class="cert-card reveal"><strong data-i18n="certUx">UX-UI 101: Kullanıcı Deneyimi ve Kullanıcı Arayüzü Tasarımı</strong><span data-i18n="certUxTag">UI/UX temelleri</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="languages">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker" data-i18n="languageKicker">Dil</div>
+            <h2 data-i18n="languageTitle">Yabancı Dil</h2>
+          </div>
+          <p class="section-intro" data-i18n="languageIntro">Teknik dokümantasyonları takip edebilecek ve profesyonel iletişim kurabilecek düzeyde İngilizce bilgisine sahibim.</p>
+        </div>
+        <div class="cert-grid">
+          <div class="cert-card reveal"><strong data-i18n="certLanguage">İngilizce B2</strong><span data-i18n="certLanguageTag">Yabancı dil</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container contact-box reveal">
+        <div>
+          <div class="section-kicker" style="color: rgba(255,255,255,.70);" data-i18n="contactKicker">Bana ulaşın</div>
+          <h2 data-i18n="contactTitle">Birlikte çalışalım.</h2>
+          <p data-i18n="contactText">Veri bilimi, makine öğrenmesi, veri analitiği ya da yazılım geliştirme odaklı bir konu için benimle iletişime geçebilirsiniz.</p>
+          <div class="direct-contact" style="margin-top: 18px;">
+            <a href="mailto:karadagynsemr@gmail.com">karadagynsemr@gmail.com</a>
+            <a href="tel:+905397864106">+90 539 786 4106</a>
+            <a href="https://www.linkedin.com/in/yunus-emre-karada%C4%9F-3348a0266/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/karadagynsemr" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+        <form class="contact-form" action="https://formsubmit.co/karadagynsemr@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Portfolio contact form message" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <div class="form-row">
+            <label><span data-i18n="formName">Ad Soyad</span><input id="nameInput" type="text" name="name" placeholder="Adınız" required /></label>
+            <label><span data-i18n="formEmail">E-posta</span><input id="emailInput" type="email" name="email" placeholder="E-posta" required /></label>
+          </div>
+          <label><span data-i18n="formMessage">Mesaj</span><textarea id="messageInput" name="message" placeholder="Mesajınız" required></textarea></label>
+          <button class="btn btn-primary" type="submit" data-i18n="formButton">Gönder</button>
+          <p class="form-note" data-i18n="formNote">FormSubmit ilk kullanımda e-posta onayı isteyebilir.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Yunus Emre Karadağ. <span data-i18n="footerText">Tüm hakları saklıdır.</span></div>
+  </footer>
+
+  <script>
+    const translations = {
+      tr: {
+        title: 'Yunus Emre Karadağ | Portfolyo',
+        brandSub: 'Portfolyo',
+        navProjects: 'Projeler', navSkills: 'Yetenekler', navExperience: 'Deneyim', navCertificates: 'Sertifikalar', navLanguage: 'Dil', navContact: 'İletişim',
+        eyebrow: 'Yeni fırsatlara açık',
+        heroTitle: 'Veriyi, <span>anlaşılır</span> çözümlere dönüştürüyorum.',
+        heroCopy: 'Ben Yunus Emre Karadağ. Bilgisayar mühendisiyim; veri bilimi, makine öğrenmesi, açıklanabilir yapay zeka ve veri görselleştirme alanlarında projeler geliştiriyorum.',
+        heroProjectButton: 'Projelerimi incele',
+        cvPdfButton: 'Türkçe CV (PDF)', cvWordButton: 'Türkçe CV (Word)',
+        floatTitle: 'Data Science · ML · XAI', floatText: 'Veri odaklı, açıklanabilir ve kullanışlı çözümler.',
+        projectsKicker: 'Seçili işler', projectsTitle: 'Projeler', projectsIntro: 'Makine öğrenmesi, açıklanabilir yapay zeka, veritabanı modelleme, dashboard tasarımı ve web tabanlı sistem geliştirme üzerine yaptığım çalışmalardan bazıları.',
+        projectExplainovaTitle: 'Explainova - Kodlama Gerektirmeyen Makine Öğrenmesi Platformu',
+        projectExplainovaText: 'Teknik bilgisi olmayan kullanıcıların tablo verilerini analiz edip makine öğrenmesi modellerini karşılaştırabildiği uçtan uca bir platform. Ön işleme, otomatik sınıflandırma/regresyon akışı, SHAP, PDP/ICE ve Word raporu oluşturma özellikleri içerir.',
+        projectMobileTitle: 'Mobil Uygulama Mağazası Veritabanı Tasarımı ve Görselleştirme',
+        projectMobileText: 'Uygulama mağazası verisi için ER diyagramı, ilişkisel şema, normalizasyon yapısı, SQL sorguları ve Tableau dashboardları tasarladım.',
+        projectAttendanceTitle: 'Öğrenci Yoklama Takip Sistemi',
+        projectAttendanceText: 'Flask arayüzünü PostgreSQL veri katmanı ve ZeroMQ mesajlaşma yapısıyla bağlayan web tabanlı yoklama sistemi geliştirdim.',
+        projectRestaurantTitle: 'Restoran Yönetim Sistemi',
+        projectRestaurantText: 'Rezervasyon, sipariş, menü ve restoran operasyonları için ilişkisel tablolar ve temel SQL sorguları tasarladım.',
+        skillsKicker: 'Teknik alanlar', skillsTitle: 'Yetenekler', skillsIntro: 'Veri bilimi ve yazılım geliştirme süreçlerinde kullandığım araçlar ve üzerine çalıştığım alanlar.',
+        skillProgrammingTitle: 'Programlama', skillDataTitle: 'Veri Bilimi & ML', skillVizTitle: 'Görselleştirme', skillDatabaseTitle: 'Veritabanı', skillWebTitle: 'Web & Uygulama', skillPracticeTitle: 'Yazılım Pratikleri',
+        experienceKicker: 'Deneyim & eğitim', experienceTitle: 'Arka plan', experienceIntro: 'Akademik çalışmalarımı uygulamalı projeler ve staj deneyimiyle destekledim.',
+        internDate: 'Ağustos 2025', internTitle: 'Stajyer · Telcorex İletişim ve Dijital Dönüşüm Hizmetleri', internText: 'Python kullanarak veri hazırlama, keşifsel veri analizi ve makine öğrenmesi model eğitimi çalışmalarına destek verdim. Pandas, NumPy ve scikit-learn ile veri ön işleme ve model değerlendirme akışlarını uyguladım.',
+        educationTitle: 'Bilgisayar Mühendisliği · Alanya Alaaddin Keykubat Üniversitesi', educationText: 'Veri bilimi, makine öğrenmesi, veritabanı sistemleri, yazılım geliştirme ve veri görselleştirme odaklı çalışmalar yaptım.',
+        certKicker: 'Sertifikalar', certTitle: 'Programlar', certIntro: 'Yapay zeka, veri bilimi, makine öğrenmesi, Git/GitHub ve UI/UX alanlarında tamamladığım eğitimler.',
+        certHuawei: 'Huawei AI Bootcamp', certHuaweiTag: 'Yapay zeka temelleri', certGit: 'Git & GitHub', certDataViz: 'Data Science & Data Visualization', certMl: 'Machine Learning', certUx: 'UX-UI 101: Kullanıcı Deneyimi ve Kullanıcı Arayüzü Tasarımı', certUxTag: 'UI/UX temelleri',
+        languageKicker: 'Dil', languageTitle: 'Yabancı Dil', languageIntro: 'Teknik dokümantasyonları takip edebilecek ve profesyonel iletişim kurabilecek düzeyde İngilizce bilgisine sahibim.', certLanguage: 'İngilizce B2', certLanguageTag: 'Yabancı dil',
+        contactKicker: 'Bana ulaşın', contactTitle: 'Birlikte çalışalım.', contactText: 'Veri bilimi, makine öğrenmesi, veri analitiği ya da yazılım geliştirme odaklı bir konu için benimle iletişime geçebilirsiniz.',
+        formName: 'Ad Soyad', formEmail: 'E-posta', formMessage: 'Mesaj', formButton: 'Gönder', formNote: 'FormSubmit ilk kullanımda e-posta onayı isteyebilir.', footerText: 'Tüm hakları saklıdır.',
+        namePlaceholder: 'Adınız', emailPlaceholder: 'E-posta', messagePlaceholder: 'Mesajınız',
+        cvPdf: 'Yunus_Emre_Karadag_CV_TR.pdf', cvWord: 'Yunus_Emre_Karadag_CV_TR.docx'
+      },
+      en: {
+        title: 'Yunus Emre Karadağ | Portfolio',
+        brandSub: 'Portfolio',
+        navProjects: 'Projects', navSkills: 'Skills', navExperience: 'Experience', navCertificates: 'Certificates', navLanguage: 'Language', navContact: 'Contact',
+        eyebrow: 'Open to new opportunities',
+        heroTitle: 'Turning data into <span>clear</span> solutions.',
+        heroCopy: 'I am Yunus Emre Karadağ, a Computer Engineering graduate developing projects in data science, machine learning, explainable AI, and data visualization.',
+        heroProjectButton: 'View my projects',
+        cvPdfButton: 'English CV (PDF)', cvWordButton: 'English CV (Word)',
+        floatTitle: 'Data Science · ML · XAI', floatText: 'Data-driven, explainable, and practical solutions.',
+        projectsKicker: 'Selected work', projectsTitle: 'Projects', projectsIntro: 'A selection of my work in machine learning, explainable AI, database modeling, dashboard design, and web-based system development.',
+        projectExplainovaTitle: 'Explainova - No-Code Machine Learning Platform',
+        projectExplainovaText: 'An end-to-end platform that enables non-technical users to analyze tabular datasets and compare machine learning models. It includes preprocessing, automatic classification/regression flow, SHAP explainability, PDP/ICE outputs, and Word report generation.',
+        projectMobileTitle: 'Mobile App Store Database Design & Visualization',
+        projectMobileText: 'Designed an ER diagram, relational schema, normalization structure, SQL queries, and Tableau dashboards for app store data.',
+        projectAttendanceTitle: 'Student Attendance Tracking System',
+        projectAttendanceText: 'Developed a web-based attendance system connecting Flask UI, PostgreSQL data layer, and ZeroMQ messaging structure.',
+        projectRestaurantTitle: 'Restaurant Management System',
+        projectRestaurantText: 'Designed relational tables and basic SQL queries for reservation, order, menu, and restaurant operations.',
+        skillsKicker: 'Technical areas', skillsTitle: 'Skills', skillsIntro: 'Tools I use and areas I focus on in data science and software development workflows.',
+        skillProgrammingTitle: 'Programming', skillDataTitle: 'Data Science & ML', skillVizTitle: 'Visualization', skillDatabaseTitle: 'Database', skillWebTitle: 'Web & Apps', skillPracticeTitle: 'Software Practices',
+        experienceKicker: 'Experience & education', experienceTitle: 'Background', experienceIntro: 'I supported my academic work with applied projects and internship experience.',
+        internDate: 'August 2025', internTitle: 'Intern · Telcorex Communication and Digital Transformation Services', internText: 'Supported data preparation, exploratory data analysis, and machine learning model training using Python. Applied Pandas, NumPy, and scikit-learn in practical data preprocessing and model evaluation workflows.',
+        educationTitle: 'Computer Engineering · Alanya Alaaddin Keykubat University', educationText: 'Focused on data science, machine learning, database systems, software development, and data visualization.',
+        certKicker: 'Certificates', certTitle: 'Programs', certIntro: 'Courses and programs I completed in artificial intelligence, data science, machine learning, Git/GitHub, and UI/UX.',
+        certHuawei: 'Huawei AI Bootcamp', certHuaweiTag: 'AI foundations', certGit: 'Git & GitHub', certDataViz: 'Data Science & Data Visualization', certMl: 'Machine Learning', certUx: 'UX-UI 101: User Experience and User Interface Design', certUxTag: 'UI/UX fundamentals',
+        languageKicker: 'Language', languageTitle: 'Foreign Language', languageIntro: 'I have English proficiency at B2 level for following technical documentation and professional communication.', certLanguage: 'English B2', certLanguageTag: 'Foreign language',
+        contactKicker: 'Contact me', contactTitle: 'Let’s work together.', contactText: 'You can contact me about data science, machine learning, data analytics, or software development projects.',
+        formName: 'Full Name', formEmail: 'Email', formMessage: 'Message', formButton: 'Send', formNote: 'FormSubmit may ask for email confirmation on first use.', footerText: 'All rights reserved.',
+        namePlaceholder: 'Your name', emailPlaceholder: 'Email', messagePlaceholder: 'Your message',
+        cvPdf: 'Yunus_Emre_Karadag_CV_EN.pdf', cvWord: 'Yunus_Emre_Karadag_CV_EN.docx'
+      }
+    };
+
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const cvPdfLink = document.getElementById('cvPdfLink');
+    const cvWordLink = document.getElementById('cvWordLink');
+    const nameInput = document.getElementById('nameInput');
+    const emailInput = document.getElementById('emailInput');
+    const messageInput = document.getElementById('messageInput');
+
+    function setLanguage(lang) {
+      const t = translations[lang] || translations.tr;
+      document.documentElement.lang = lang;
+      document.title = t.title;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) el.textContent = t[key];
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (t[key]) el.innerHTML = t[key];
+      });
+      cvPdfLink.href = t.cvPdf;
+      cvWordLink.href = t.cvWord;
+      nameInput.placeholder = t.namePlaceholder;
+      emailInput.placeholder = t.emailPlaceholder;
+      messageInput.placeholder = t.messagePlaceholder;
+      langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+      localStorage.setItem('portfolioLanguage', lang);
+    }
+
+    langButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.getElementById('year').textContent = new Date().getFullYear();
+    setLanguage(localStorage.getItem('portfolioLanguage') || 'tr');
+  </script>
+</body>
+</html>
